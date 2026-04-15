@@ -13,11 +13,11 @@ import heroBg from "@/assets/hero-bg.jpg";
 import cozyLogo from "@/assets/cozy-logo.png";
 
 const featuredRugs = [
-  { src: spiff1, title: "Spaceman Spiff", desc: "Die cut · 48" × 26" · Custom" },
-  { src: chromakopia1, title: "Chromakopia", desc: "Die cut · 60" × 8" · Pop Culture" },
-  { src: cn2, title: "Cartoon Network", desc: "23" × 11" · Pop Culture" },
-  { src: uno3, title: "Uno +4", desc: "38" × 22" · Pop Culture" },
-  { src: uno1, title: "Uno +4 Lifestyle", desc: "38" × 22" · Pop Culture" },
+  { src: spiff1, title: "Spaceman Spiff", desc: 'Die cut · 48" × 26" · Custom' },
+  { src: chromakopia1, title: "Chromakopia", desc: 'Die cut · 60" × 8" · Pop Culture' },
+  { src: cn2, title: "Cartoon Network", desc: '23" × 11" · Pop Culture' },
+  { src: uno3, title: "Uno +4", desc: '38" × 22" · Pop Culture' },
+  { src: uno1, title: "Uno +4 Lifestyle", desc: '38" × 22" · Pop Culture' },
 ];
 
 const Index = () => {

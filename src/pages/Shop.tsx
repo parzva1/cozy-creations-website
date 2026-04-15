@@ -13,11 +13,12 @@ import uno2 from "@/assets/uno-2.jpeg";
 import uno3 from "@/assets/uno-3.jpeg";
 
 const shopItems = [
-  { id: 1, src: rug1, title: "Retro Wave", price: 189, size: '24" round', available: true },
-  { id: 2, src: rug2, title: "Ocean Drift", price: 229, size: '30" × 30"', available: true },
-  { id: 3, src: rug3, title: "Bear Buddies", price: 159, size: '20" × 24"', available: false },
-  { id: 4, src: rug4, title: "Aztec Dream", price: 349, size: '4\' × 6\'', available: true },
-  { id: 5, src: rug5, title: "Daisy Bloom", price: 199, size: '28" round', available: true },
+  { id: 1, src: spiff1, title: "Spaceman Spiff", price: 299, size: '48" × 26"', available: true },
+  { id: 2, src: chromakopia1, title: "Chromakopia", price: 249, size: '60" × 8"', available: true },
+  { id: 3, src: cn1, title: "Cartoon Network", price: 199, size: '23" × 11"', available: true },
+  { id: 4, src: cn2, title: "Cartoon Network", price: 199, size: '23" × 11"', available: true },
+  { id: 5, src: uno3, title: "Uno +4", price: 229, size: '38" × 22"', available: false },
+  { id: 6, src: uno1, title: "Uno +4 Lifestyle", price: 229, size: '38" × 22"', available: true },
 ];
 
 const Shop = () => {
