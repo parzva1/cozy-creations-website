@@ -1,24 +1,19 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ShoppingCart, X, Instagram } from "lucide-react";
+import { X, Instagram } from "lucide-react";
 import LiquidGlassCard from "@/components/LiquidGlassCard";
 import PageTransition from "@/components/PageTransition";
 import spiff1 from "@/assets/spiff-1.jpeg";
 import chromakopia1 from "@/assets/chromakopia-1.jpeg";
-import chromakopia2 from "@/assets/chromakopia-2.jpeg";
 import cn1 from "@/assets/cn-1.jpeg";
 import cn2 from "@/assets/cn-2.jpeg";
-import uno1 from "@/assets/uno-1.png";
-import uno2 from "@/assets/uno-2.jpeg";
 import uno3 from "@/assets/uno-3.jpeg";
 
 const shopItems = [
-  { id: 1, src: spiff1, title: "Spaceman Spiff", price: 299, size: '48" × 26"', available: true },
-  { id: 2, src: chromakopia1, title: "Chromakopia", price: 249, size: '60" × 8"', available: true },
-  { id: 3, src: cn1, title: "Cartoon Network", price: 199, size: '23" × 11"', available: true },
-  { id: 4, src: cn2, title: "Cartoon Network", price: 199, size: '23" × 11"', available: true },
-  { id: 5, src: uno3, title: "Uno +4", price: 229, size: '38" × 22"', available: false },
-  { id: 6, src: uno1, title: "Uno +4 Lifestyle", price: 229, size: '38" × 22"', available: true },
+  { id: 1, src: spiff1, title: "Spaceman Spiff", price: 250, size: '48" × 26"', available: true },
+  { id: 2, src: chromakopia1, title: "Chromakopia", price: 200, size: '60" × 8"', available: true },
+  { id: 3, src: cn2, secondarySrc: cn1, title: "Cartoon Network", price: 100, size: '23" × 11"', available: true },
+  { id: 4, src: uno3, title: "Uno +4", price: 250, size: '38" × 22"', available: true },
 ];
 
 const Shop = () => {
@@ -117,6 +112,15 @@ const Shop = () => {
                     className="w-full h-full object-cover"
                   />
                 </div>
+                {'secondarySrc' in selected && selected.secondarySrc && (
+                  <div className="rounded-2xl overflow-hidden aspect-square mb-4">
+                    <img
+                      src={selected.secondarySrc}
+                      alt={`${selected.title} — alternate view`}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                )}
                 <div className="px-2 pb-2">
                   <h2 className="font-display text-2xl font-bold text-foreground mb-1">
                     {selected.title}

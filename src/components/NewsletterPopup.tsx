@@ -1,13 +1,11 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Mail } from "lucide-react";
-import { supabase } from "@/integrations/supabase/client";
-import { toast } from "sonner";
 
 const NewsletterPopup = () => {
   const [open, setOpen] = useState(false);
   const [email, setEmail] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
 
   useEffect(() => {
     const dismissed = localStorage.getItem("newsletter-dismissed");
@@ -22,27 +20,11 @@ const NewsletterPopup = () => {
     localStorage.setItem("newsletter-dismissed", "true");
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!email.trim()) return;
-
-    setLoading(true);
-    const { error } = await supabase
-      .from("newsletter_subscribers")
-      .insert({ email: email.trim().toLowerCase() });
-
-    setLoading(false);
-
-    if (error) {
-      if (error.code === "23505") {
-        toast.info("You're already subscribed!");
-      } else {
-        toast.error("Something went wrong. Please try again.");
-      }
-    } else {
-      toast.success("Welcome to the Cozy Crew! 🧶");
-    }
-    handleClose();
+    setSubmitted(true);
+    setTimeout(handleClose, 2000);
   };
 
   return (
@@ -74,40 +56,55 @@ const NewsletterPopup = () => {
               <Mail className="w-7 h-7 text-primary" />
             </div>
 
-            <h3 className="text-xl font-display font-bold text-foreground mb-2">
-              Join the Cozy Crew
-            </h3>
-            <p className="text-sm text-muted-foreground mb-6">
-              Get first dibs on new drops, exclusive promos & behind-the-scenes content.
-            </p>
-
-            <form onSubmit={handleSubmit} className="space-y-3">
-              <input
-                type="email"
-                required
-                maxLength={255}
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="your@email.com"
-                className="w-full px-4 py-3 rounded-xl liquid-glass border-none text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring bg-transparent text-sm"
-              />
-              <motion.button
-                type="submit"
-                disabled={loading}
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                className="w-full liquid-glass-strong px-6 py-3 rounded-xl font-medium text-foreground hover:text-primary transition-colors text-sm disabled:opacity-50"
+            {submitted ? (
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
               >
-                {loading ? "Subscribing..." : "Subscribe ✨"}
-              </motion.button>
-            </form>
+                <h3 className="text-xl font-display font-bold text-foreground mb-2">
+                  Welcome to the Cozy Crew! 🧶
+                </h3>
+                <p className="text-sm text-muted-foreground">
+                  You're in! We'll keep you posted on new drops and exclusives.
+                </p>
+              </motion.div>
+            ) : (
+              <>
+                <h3 className="text-xl font-display font-bold text-foreground mb-2">
+                  Join the Cozy Crew
+                </h3>
+                <p className="text-sm text-muted-foreground mb-6">
+                  Get first dibs on new drops, exclusive promos & behind-the-scenes content.
+                </p>
 
-            <button
-              onClick={handleClose}
-              className="text-xs text-muted-foreground mt-4 hover:text-foreground transition-colors"
-            >
-              No thanks
-            </button>
+                <form onSubmit={handleSubmit} className="space-y-3">
+                  <input
+                    type="email"
+                    required
+                    maxLength={255}
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="your@email.com"
+                    className="w-full px-4 py-3 rounded-xl liquid-glass border-none text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring bg-transparent text-sm"
+                  />
+                  <motion.button
+                    type="submit"
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    className="w-full liquid-glass-strong px-6 py-3 rounded-xl font-medium text-foreground hover:text-primary transition-colors text-sm"
+                  >
+                    Subscribe ✨
+                  </motion.button>
+                </form>
+
+                <button
+                  onClick={handleClose}
+                  className="text-xs text-muted-foreground mt-4 hover:text-foreground transition-colors"
+                >
+                  No thanks
+                </button>
+              </>
+            )}
           </motion.div>
         </motion.div>
       )}

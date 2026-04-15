@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
-import { Instagram, Facebook, Twitter, Mail } from "lucide-react";
+import { Instagram, Mail } from "lucide-react";
 import { motion } from "framer-motion";
 import cozyLogo from "@/assets/cozy-logo-2.png";
 import NewsletterPopup from "@/components/NewsletterPopup";
@@ -83,19 +83,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
                 <Instagram className="w-5 h-5" />
               </a>
               <a
-                href="#"
-                className="w-11 h-11 rounded-full liquid-glass flex items-center justify-center text-foreground hover:text-primary transition-colors hover:scale-110 transform duration-300"
-              >
-                <Facebook className="w-5 h-5" />
-              </a>
-              <a
-                href="#"
-                className="w-11 h-11 rounded-full liquid-glass flex items-center justify-center text-foreground hover:text-primary transition-colors hover:scale-110 transform duration-300"
-              >
-                <Twitter className="w-5 h-5" />
-              </a>
-              <a
-                href="mailto:hello@cozycreations.com"
+                href="mailto:cozycreations412@gmail.com"
                 className="w-11 h-11 rounded-full liquid-glass flex items-center justify-center text-foreground hover:text-primary transition-colors hover:scale-110 transform duration-300"
               >
                 <Mail className="w-5 h-5" />
