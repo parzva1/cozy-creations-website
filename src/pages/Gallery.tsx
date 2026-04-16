@@ -137,7 +137,7 @@ const Gallery = () => {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.2 }}
-                className="fixed inset-0 z-50 flex items-center justify-center p-6 bg-foreground/40 backdrop-blur-md"
+                className="fixed inset-0 z-50 flex items-center justify-center p-3 md:p-6 bg-foreground/40 backdrop-blur-md"
                 onClick={closeLightbox}
               >
                 <motion.div
@@ -151,7 +151,7 @@ const Gallery = () => {
                   {/* Close */}
                   <button
                     onClick={closeLightbox}
-                    className="absolute -top-4 -right-4 z-10 w-10 h-10 rounded-full liquid-glass-strong flex items-center justify-center text-foreground hover:text-primary transition-colors"
+                    className="absolute top-2 right-2 md:-top-4 md:-right-4 z-10 w-10 h-10 rounded-full liquid-glass-strong flex items-center justify-center text-foreground hover:text-primary transition-colors"
                   >
                     <X className="w-5 h-5" />
                   </button>
@@ -175,7 +175,7 @@ const Gallery = () => {
                           animate={{ opacity: 1 }}
                           exit={{ opacity: 0 }}
                           transition={{ duration: 0.2 }}
-                          className="w-full h-auto rounded-2xl object-contain max-h-[70vh]"
+                          className="w-full h-auto rounded-2xl object-contain max-h-[55vh] md:max-h-[70vh]"
                         />
                       </AnimatePresence>
                     </div>

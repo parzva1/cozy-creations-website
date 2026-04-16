@@ -57,7 +57,7 @@ const Index = () => {
               <img
                 src={cozyLogo}
                 alt="Cozy Creations Logo"
-                className="h-32 md:h-48 w-auto mx-auto mb-6 drop-shadow-2xl"
+                className="h-24 md:h-48 w-auto mx-auto mb-6 drop-shadow-2xl"
               />
             </motion.div>
             <motion.h1
@@ -173,7 +173,7 @@ const Index = () => {
         {/* About Snippet */}
         <section className="py-24 px-6">
           <div className="max-w-5xl mx-auto">
-            <LiquidGlassCard hover={false} className="p-10 md:p-16">
+            <LiquidGlassCard hover={false} className="p-6 md:p-16">
               <div className="text-center">
                 <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-6">
                   Made with Love in Houston

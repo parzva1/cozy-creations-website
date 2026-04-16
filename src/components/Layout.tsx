@@ -1,6 +1,7 @@
+import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Instagram, Mail } from "lucide-react";
-import { motion } from "framer-motion";
+import { Instagram, Mail, Menu, X } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import cozyLogo from "@/assets/cozy-logo-2.png";
 import NewsletterPopup from "@/components/NewsletterPopup";
 
@@ -14,6 +15,7 @@ const navLinks = [
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   const location = useLocation();
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -26,6 +28,8 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
               Cozy Creations
             </span>
           </Link>
+
+          {/* Desktop nav */}
           <div className="hidden md:flex items-center gap-1">
             {navLinks.map((link) => (
               <Link
@@ -41,23 +45,66 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
               </Link>
             ))}
           </div>
-          {/* Mobile menu */}
-          <div className="flex md:hidden items-center gap-1">
-            {navLinks.map((link) => (
-              <Link
-                key={link.to}
-                to={link.to}
-                className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
-                  location.pathname === link.to
-                    ? "bg-primary/20 text-primary"
-                    : "text-muted-foreground"
-                }`}
-              >
-                {link.label}
-              </Link>
-            ))}
-          </div>
+
+          {/* Mobile hamburger */}
+          <button
+            className="flex md:hidden items-center justify-center w-10 h-10 rounded-xl liquid-glass text-foreground"
+            onClick={() => setMobileOpen((o) => !o)}
+            aria-label={mobileOpen ? "Close menu" : "Open menu"}
+          >
+            <AnimatePresence mode="wait" initial={false}>
+              {mobileOpen ? (
+                <motion.span
+                  key="x"
+                  initial={{ rotate: -90, opacity: 0 }}
+                  animate={{ rotate: 0, opacity: 1 }}
+                  exit={{ rotate: 90, opacity: 0 }}
+                  transition={{ duration: 0.15 }}
+                >
+                  <X className="w-5 h-5" />
+                </motion.span>
+              ) : (
+                <motion.span
+                  key="menu"
+                  initial={{ rotate: 90, opacity: 0 }}
+                  animate={{ rotate: 0, opacity: 1 }}
+                  exit={{ rotate: -90, opacity: 0 }}
+                  transition={{ duration: 0.15 }}
+                >
+                  <Menu className="w-5 h-5" />
+                </motion.span>
+              )}
+            </AnimatePresence>
+          </button>
         </div>
+
+        {/* Mobile dropdown */}
+        <AnimatePresence>
+          {mobileOpen && (
+            <motion.div
+              initial={{ opacity: 0, y: -8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.2 }}
+              className="md:hidden max-w-7xl mx-auto mt-2 liquid-glass-strong rounded-2xl px-4 py-3 flex flex-col gap-1"
+            >
+              {navLinks.map((link) => (
+                <Link
+                  key={link.to}
+                  to={link.to}
+                  onClick={() => setMobileOpen(false)}
+                  className={`px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200 ${
+                    location.pathname === link.to
+                      ? "bg-primary/20 text-primary"
+                      : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </motion.div>
+          )}
+        </AnimatePresence>
       </nav>
 
       {/* Main Content */}
